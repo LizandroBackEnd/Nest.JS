@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { NamesService } from './names.service';
 import { start } from 'repl';
+import { reduce } from 'rxjs';
 
 @Controller('api/v1/names') //Se define la ruta de la API
 export class NamesController { 
@@ -18,5 +19,10 @@ export class NamesController {
     getNames(@Query('start') start: string){  
         return this.namesService.getNames(start);
 
+    } 
+     
+    @Put('/:name/:newName') //Se define el método PUT
+    updateName(@Param('name') name: string, @Param('newName') newName: string){ 
+        return this.namesService.updateName(name, newName);
     }
 }
