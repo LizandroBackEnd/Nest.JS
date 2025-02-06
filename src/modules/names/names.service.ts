@@ -8,10 +8,25 @@ export class NamesService {
         this._names = [];
     } 
      
-    createName(name: string){ 
-        this._names.push(name); 
+    createName(name: string){   
+         
+        const nameFound = this._names.find(n => n.toLowerCase().trim() == name.toLowerCase().trim()); 
+         
+        if(!nameFound){  
+            this._names.push(name); 
         console.log("Nombres: ", this._names); 
         return true;
-
+        } else {
+            return false;
+        }
+         
+    } 
+     
+    getNames(start?: string){  
+        if(!start){ 
+            return this._names; 
+        } else {
+            return this._names.filter(n => n.toLowerCase().trim().startsWith(start.toLowerCase().trim()));
+        }
     }
 }
